@@ -2,6 +2,7 @@
 
 import axios from "axios";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const HomePage = () => {
@@ -38,7 +39,7 @@ const HomePage = () => {
   return (
     <>
       <main>
-        <div className="flex gap-5 w-full justify-center items-center">
+        <div className="py-4 flex flex-wrap gap-5 w-full justify-center items-center">
           {menu.map((menu, idx) => {
             return (
               <>
@@ -64,11 +65,17 @@ const HomePage = () => {
 };
 
 const ProductCard = (props) => {
+  const navigate = useRouter();
+  const handleProductShow = (id) => {
+    navigate.push(`product/${id}`);
+  };
+
   return (
     <>
       <div
         key={props.id}
         className="flex flex-col gap-2 border rounded-sm w-full  lg:w-[25%] h-[80vh] items-center p-4"
+        onClick={() => handleProductShow(props.id)}
       >
         <Image
           src={`${props.image}`}
@@ -77,7 +84,7 @@ const ProductCard = (props) => {
           alt={props.title}
         />
         <h3 className="text-lg font-medium text-center">{props.title}</h3>
-        <p className="text-lg "> {props.price}</p>
+        <p className="text-lg ">&#8377; {props.price}</p>
         <p className="text-justify text-sm overflow-y-scroll">
           {props.description}
         </p>
