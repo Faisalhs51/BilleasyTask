@@ -55,7 +55,7 @@ const HomePage = () => {
         </div>
         <div className="flex flex-col lg:flex-row flex-wrap gap-2 p-10 w-full items-center justify-between h-fit">
           {filteredProducts.map((items) => {
-            return <ProductCard {...items} />;
+            return <ProductCard {...items} key={items.id} />;
           })}
         </div>
       </main>
